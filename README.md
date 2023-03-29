@@ -24,7 +24,8 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Projeto designado à construção de um serviço tipo REST, com o objetivo de servir, por um único endpoint (/api/questions/:quizId), objetos do tipo JSON, designados a conter em si uma questão de uma lista de questões de um quiz.
+
 
 ## Installation
 
