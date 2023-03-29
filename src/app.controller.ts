@@ -16,12 +16,6 @@ export class AppController {
       AppController.questionsFetched = true;
     }
   }
-
-  @Get()
-  GetQuestions() : JSON {
-    return AppController.questionsJson;
-  };
-
   @Get(':quizId')
   GetQuestion(@Res({passthrough: true}) res : Response, @Param() params : any) : JSON {
     // res.status(200);
@@ -31,17 +25,14 @@ export class AppController {
     if(AppController.questionsJson[params.quizId - 1] === undefined) {
       res.status(HttpStatus.NOT_FOUND).send({StatusCode: HttpStatus.NOT_FOUND, NotFound: 'Object not found.'});
     }
-    console.log(AppController.questionsJson[params.quizId - 1]);
     return AppController.questionsJson[params.quizId - 1];
   };
   private async GetQuestionsJSON(): Promise<JSON> {
     const quizJson = await this.appService.FetchQuizJson();
-    // console.log('hi' + JSON.stringify(quizJson));
     const data = JSON.parse(this.TreatResponse(JSON.stringify(quizJson)));
     if(AppController.questionsCount === 0) {
       this.CountQuestions(data);
     }
-    // console.log(data);
     return data;
   }
   private TreatResponse(res: string) : string {
@@ -52,7 +43,6 @@ export class AppController {
   private CountQuestions(data: JSON) : void {
     let count: number = 0;
     while(count < 25) {
-      // console.log(count);
       if(data[count].category === "final") {
         AppController.questionsCount = count - 1;
         data[0].questionsCount = count - 1;
