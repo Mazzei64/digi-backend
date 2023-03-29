@@ -20,8 +20,6 @@ export class AppService {
     const jsonStr = JSON.stringify(data);
     const initLine = '[{"questionsCount":0},';
     const finalLine = ',{"category":"final"}]';
-    // console.log(JSON.parse((initLine.concat(jsonStr.substring(1))).substring(0, initLine.length - 1 + jsonStr.length - 1).concat(finalLine)));
-    // console.log(JSON.parse(initLine.concat(jsonStr.substring(1)).substring(0, jsonStr.length + initLine.length - 1).concat(finalLine)));
     return JSON.parse((initLine.concat(jsonStr.substring(1))).substring(0, initLine.length - 1 + jsonStr.length - 1).concat(finalLine));
   }
 }
